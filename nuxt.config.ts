@@ -1,5 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  css: ['@/assets/scss/variables.scss'],
-  modules: ['@element-plus/nuxt']
+  modules: ['@element-plus/nuxt'],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@import "@/assets/scss/variables.scss";'
+        }
+      }
+    }
+  }
 })
