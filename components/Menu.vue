@@ -7,18 +7,18 @@
         mode="horizontal"
         :ellipsis="false"
       >
-        <el-sub-menu index="2">
+        <el-sub-menu index="1">
           <template #title>
             {{ testUser.name }}
           </template>
-          <el-menu-item index="2-1">
-            item one
+          <el-menu-item index="1-1">
+            Профиль
           </el-menu-item>
-          <el-menu-item index="2-2">
-            item two
+          <el-menu-item index="1-2">
+            Мои объявления
           </el-menu-item>
-          <el-menu-item index="2-3">
-            item three
+          <el-menu-item index="1-3">
+            Выход
           </el-menu-item>
         </el-sub-menu>
       </el-menu>
@@ -56,5 +56,13 @@ const toggleLogin = () => {
   display: flex;
   align-items: center;
   gap: 12px
+}
+
+.el-menu--horizontal {
+  border-bottom: 0;
+}
+
+.el-sub-menu__title {
+  padding-left: 0;
 }
 </style>
