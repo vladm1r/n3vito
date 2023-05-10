@@ -1,31 +1,31 @@
 <template>
   <div class="menu-container">
     <el-avatar :src="avatarSource" fit="cover" />
-    <div v-if="state.isLogged">
-      <el-menu
-        class="el-menu-demo"
-        mode="horizontal"
-        :ellipsis="false"
-      >
-        <el-sub-menu index="1">
-          <template #title>
-            {{ testUser.name }}
-          </template>
-          <el-menu-item index="1-1">
-            Профиль
-          </el-menu-item>
-          <el-menu-item index="1-2">
-            Мои объявления
-          </el-menu-item>
-          <el-menu-item index="1-3">
-            Выход
-          </el-menu-item>
-        </el-sub-menu>
-      </el-menu>
-    </div>
-    <div v-else @click="toggleLogin">
-      Вход
-    </div>
+
+    <el-menu
+      class="el-menu-demo"
+      mode="horizontal"
+      :ellipsis="false"
+    >
+      <el-menu-item v-if="!state.isLogged" index="1" @click="toggleLogin">
+        Вход
+      </el-menu-item>
+
+      <el-sub-menu v-else index="2">
+        <template #title>
+          {{ testUser.name }}
+        </template>
+        <el-menu-item index="2-1">
+          Профиль
+        </el-menu-item>
+        <el-menu-item index="2-2">
+          Мои объявления
+        </el-menu-item>
+        <el-menu-item index="2-3">
+          Выход
+        </el-menu-item>
+      </el-sub-menu>
+    </el-menu>
   </div>
 </template>
 
@@ -55,14 +55,9 @@ const toggleLogin = () => {
 .menu-container {
   display: flex;
   align-items: center;
-  gap: 12px
 }
 
 .el-menu--horizontal {
   border-bottom: 0;
-}
-
-.el-sub-menu__title {
-  padding-left: 0;
 }
 </style>
