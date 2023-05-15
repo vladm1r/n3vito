@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { currencyFormatter } from '../Lib/currencyFormatter'
+import { currencyFormatter } from '../lib/currencyFormatter'
 
 const props = defineProps<{
   value: number
