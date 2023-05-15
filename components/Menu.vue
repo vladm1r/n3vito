@@ -1,6 +1,6 @@
 <template>
   <div class="menu-container">
-    <el-avatar :src="avatarSource" fit="cover" />
+    <UserAvatar :src="menuAvatarSource" fit="cover" />
 
     <el-menu
       class="el-menu-demo"
@@ -40,12 +40,8 @@ const testUser:User = {
   phone: '+79035748779'
 }
 
-const avatarSource = computed<string>(() => {
-  if (state.isLogged) {
-    return testUser.avatar ? testUser.avatar : '/img/avatar-default.png'
-  }
-
-  return '/img/avatar-default.png'
+const menuAvatarSource = computed<string | undefined>(() => {
+  return state.isLogged ? testUser.avatar : '/img/avatar-default.png'
 })
 
 const toggleLogin = () => {
