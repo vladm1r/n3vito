@@ -30,20 +30,22 @@
 </template>
 
 <script setup lang="ts">
+import type { User } from 'types'
+
 const state = reactive({ isLogged: false })
 
-interface userTemplate {
-  name: string,
-  avatar: string
-}
-
-const testUser:userTemplate = {
+const testUser:User = {
   name: 'Иван Иванов',
-  avatar: '/img/kotik.jpg'
+  avatar: '/img/kotik.jpg',
+  phone: '+79035748779'
 }
 
 const avatarSource = computed<string>(() => {
-  return state.isLogged ? testUser.avatar : '/img/avatar-default.png'
+  if (state.isLogged) {
+    return testUser.avatar ? testUser.avatar : '/img/avatar-default.png'
+  }
+
+  return '/img/avatar-default.png'
 })
 
 const toggleLogin = () => {

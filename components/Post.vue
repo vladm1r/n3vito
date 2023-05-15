@@ -27,12 +27,7 @@
 </template>
 
 <script setup lang="ts">
-interface Post {
-  title: string,
-  price: number,
-  image: string,
-  description: string
-}
+import type { Post } from 'types'
 
 const postTemplate: Post = {
   title: 'Супер гитара',
