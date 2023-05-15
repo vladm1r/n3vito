@@ -22,6 +22,8 @@
           {{ postTemplate.description }}
         </p>
       </div>
+
+      <ContactCart />
     </div>
   </article>
 </template>
