@@ -6,12 +6,12 @@
 
 <style lang="scss">
 .logo {
-  font-size: 40px;
+  font-size: $font-size-3xl;
   text-decoration: none;
   color: $color-text-primary;
 
   @media(max-width: $bp-mobile) {
-    font-size: 28px;
+    font-size: $font-size-2xl;
   }
 }
 </style>

@@ -1,7 +1,20 @@
+// layout
 $container-width: 1024px;
 
+// typography
 $font-family: 'Roboto';
 
+$font-size-sm: 14px;
+$font-size-main: 16px;
+$font-size-md: 18px;
+$font-size-lg: 20px;
+$font-size-xl: 22px;
+$font-size-2xl: 32px;
+$font-size-3xl: 40px;
+
+// colors
+$color-primary: #409eff;
 $color-text-primary: #303133;
 
+// breakpoints
 $bp-mobile: 768px;

@@ -52,11 +52,11 @@ const postTemplate: Post = {
   }
 
   &__title {
-    font-size: 32px;
+    font-size: $font-size-2xl;
   }
 
   &__price {
-    font-size: 32px;
+    font-size: $font-size-2xl;
   }
 
   &__body {
@@ -76,12 +76,12 @@ const postTemplate: Post = {
   }
 
   &__description-title {
-    font-size: 22px;
+    font-size: $font-size-xl;
     margin-bottom: 10px;
   }
 
   &__desctiption {
-    font-size: 16px;
+    font-size: $font-size-main;
   }
 }
 

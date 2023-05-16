@@ -27,13 +27,14 @@ const testUser:User = {
   gap: 20px;
 
   &__name {
-    font-size: 18px;
+    font-size: $font-size-md;
     margin: 0 0 4px 0;
   }
 
   &__phone {
-    font-size: 16px;
+    font-size: $font-size-main;
     text-decoration: none;
+    color: $color-primary;
   }
 }
 
