@@ -49,25 +49,46 @@ const postTemplate: Post = {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 40px;
+
+    @media(max-width: $bp-mobile) {
+      display: block;
+    }
   }
 
   &__title {
     font-size: $font-size-2xl;
+
+    @media(max-width: $bp-mobile) {
+      font-size: $font-size-xl;
+    }
   }
 
   &__price {
     font-size: $font-size-2xl;
+
+    @media(max-width: $bp-mobile) {
+      font-size: $font-size-xl;
+    }
   }
 
   &__body {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 40px;
+
+    @media(max-width: $bp-mobile) {
+      display: block;
+    }
   }
 
   &__img-container {
     height: 400px;
     background: #b2b2b2;
+
+    @media(max-width: $bp-mobile) {
+      background: none;
+      height: auto;
+    }
   }
 
   &__img {
@@ -77,7 +98,6 @@ const postTemplate: Post = {
 
   &__description-title {
     font-size: $font-size-xl;
-    margin-bottom: 10px;
   }
 
   &__desctiption {
