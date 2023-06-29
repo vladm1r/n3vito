@@ -1,5 +1,5 @@
 <template>
-  <el-avatar :src="props.src" fit="cover" />
+  <!-- <el-avatar :src="props.src" fit="cover" /> -->
 </template>
 
 <script setup lang="ts">

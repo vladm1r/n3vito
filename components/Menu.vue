@@ -2,7 +2,7 @@
   <div class="menu-container">
     <UserAvatar :src="menuAvatarSource" fit="cover" />
 
-    <el-menu
+    <!-- <el-menu
       class="el-menu-demo"
       mode="horizontal"
       :ellipsis="false"
@@ -25,7 +25,7 @@
           Выход
         </el-menu-item>
       </el-sub-menu>
-    </el-menu>
+    </el-menu> -->
   </div>
 </template>
 

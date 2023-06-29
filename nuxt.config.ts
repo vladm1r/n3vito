@@ -14,7 +14,6 @@ export default defineNuxtConfig({
       ]
     }
   },
-  modules: ['@element-plus/nuxt'],
   vite: {
     css: {
       preprocessorOptions: {

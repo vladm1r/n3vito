@@ -11,7 +11,7 @@
     <div class="post__body">
       <div>
         <div class="post__img-container">
-          <el-image class="post__img" :src="postTemplate.image" fit="scale-down" />
+          <!-- <el-image class="post__img" :src="postTemplate.image" fit="scale-down" /> -->
         </div>
 
         <h3 class="post__description-title">
