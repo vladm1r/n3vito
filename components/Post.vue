@@ -18,6 +18,8 @@
           Описание
         </h3>
 
+        <Button> TEST </Button>
+
         <p class="post__desctiption">
           {{ postTemplate.description }}
         </p>
