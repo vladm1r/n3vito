@@ -11,14 +11,12 @@
     <div class="post__body">
       <div>
         <div class="post__img-container">
-          <!-- <el-image class="post__img" :src="postTemplate.image" fit="scale-down" /> -->
+          <Image image-class="post__img" :src="postTemplate.image" />
         </div>
 
         <h3 class="post__description-title">
           Описание
         </h3>
-
-        <Button> TEST </Button>
 
         <p class="post__desctiption">
           {{ postTemplate.description }}
@@ -86,6 +84,8 @@ const postTemplate: Post = {
   &__img-container {
     height: 400px;
     background: #b2b2b2;
+    text-align: center;
+    overflow: hidden;
 
     @media(max-width: $bp-mobile) {
       background: none;
@@ -94,7 +94,6 @@ const postTemplate: Post = {
   }
 
   &__img {
-    width: 100%;
     height: 100%;
   }
 
