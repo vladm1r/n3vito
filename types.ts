@@ -10,3 +10,7 @@ export interface Post {
   image?: string,
   description?: string
 }
+export interface MenuItem {
+  label: string,
+  icon: string,
+}

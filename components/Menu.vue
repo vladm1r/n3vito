@@ -1,38 +1,51 @@
 <template>
   <div class="menu-container">
-    <UserAvatar :src="menuAvatarSource" fit="cover" />
+    <c-button
+      v-if="!state.isLogged"
+      type="button"
+      label="Вход"
+      icon="pi pi-user"
+      outlined
+      @click="toggleLogin"
+    />
 
-    <!-- <el-menu
-      class="el-menu-demo"
-      mode="horizontal"
-      :ellipsis="false"
+    <c-button
+      v-else
+      type="button"
+      aria-haspopup="true"
+      aria-controls="overlay_menu"
+      class="menu-button"
+      rounded
+      @click="toggle"
     >
-      <el-menu-item v-if="!state.isLogged" index="1" @click="toggleLogin">
-        Вход
-      </el-menu-item>
+      <c-avatar :image="menuAvatarSource" shape="circle" size="large" />
+    </c-button>
 
-      <el-sub-menu v-else index="2">
-        <template #title>
-          {{ testUser.name }}
-        </template>
-        <el-menu-item index="2-1">
-          Профиль
-        </el-menu-item>
-        <el-menu-item index="2-2">
-          Мои объявления
-        </el-menu-item>
-        <el-menu-item index="2-3">
-          Выход
-        </el-menu-item>
-      </el-sub-menu>
-    </el-menu> -->
+    <c-menu id="overlay_menu" ref="menu" :model="menuItems" :popup="true" />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { User } from 'types'
+import type { User, MenuItem } from 'types'
 
 const state = reactive({ isLogged: false })
+
+const menu = ref()
+
+const menuItems = ref<MenuItem[]>([
+  {
+    label: 'Профиль',
+    icon: 'pi pi-user'
+  },
+  {
+    label: 'Объявления',
+    icon: 'pi pi-star'
+  },
+  {
+    label: 'Выход',
+    icon: 'pi pi-sign-out'
+  }
+])
 
 const testUser:User = {
   name: 'Иван Иванов',
@@ -47,6 +60,10 @@ const menuAvatarSource = computed<string | undefined>(() => {
 const toggleLogin = () => {
   state.isLogged = !state.isLogged
 }
+
+const toggle = (event:Event) => {
+  menu.value.toggle(event)
+}
 </script>
 
 <style>
@@ -55,7 +72,15 @@ const toggleLogin = () => {
   align-items: center;
 }
 
-.el-menu--horizontal {
-  border-bottom: 0;
+.menu-button {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background: unset;
+
+  &:hover {
+    background: unset;
+  }
 }
+
 </style>
