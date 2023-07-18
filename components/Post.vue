@@ -11,7 +11,7 @@
     <div class="post__body">
       <div>
         <div class="post__img-container">
-          <Image image-class="post__img" :src="postTemplate.image" />
+          <c-image image-class="post__img" :src="postTemplate.image" />
         </div>
 
         <h3 class="post__description-title">
@@ -86,15 +86,12 @@ const postTemplate: Post = {
     background: #b2b2b2;
     text-align: center;
     overflow: hidden;
-
-    @media(max-width: $bp-mobile) {
-      background: none;
-      height: auto;
-    }
   }
 
   &__img {
     height: 100%;
+    margin-left: 50%;
+    transform: translate(-50%, 0);
   }
 
   &__description-title {
