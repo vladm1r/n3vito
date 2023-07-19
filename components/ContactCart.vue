@@ -7,7 +7,7 @@
       <a :href="`tel:${testUser.phone}`" class="contact-cart__phone"> {{ testUser.phone }}</a>
     </div>
 
-    <UserAvatar :src="testUser.avatar" />
+    <c-avatar :image="testUser.avatar" shape="circle" />
   </div>
 </template>
 
@@ -16,7 +16,8 @@ import type { User } from 'types'
 
 const testUser:User = {
   name: 'Иван Иванов',
-  phone: '+79035748779'
+  phone: '+79035748779',
+  avatar: '/img/kotik.jpg'
 }
 
 </script>
