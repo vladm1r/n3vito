@@ -83,4 +83,8 @@ const toggle = (event:Event) => {
   }
 }
 
+.p-menu {
+  margin-top: 8px;
+}
+
 </style>
