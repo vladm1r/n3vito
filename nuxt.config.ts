@@ -22,6 +22,7 @@ export default defineNuxtConfig({
   build: {
     transpile: ['primevue']
   },
+  modules: ['@formkit/nuxt'],
   vite: {
     css: {
       preprocessorOptions: {
