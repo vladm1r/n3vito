@@ -2,7 +2,7 @@
   <div class="login-form-container">
     <FormKit
       type="form"
-      submit-label="Войти"
+      submit-label="Зарегистрироваться"
       @submit="onSubmit"
     >
       <FormKit
@@ -18,8 +18,8 @@
     </FormKit>
 
     <p>
-      Нет аккаунта? <NuxtLink to="signup">
-        Зарегистрируйтесь
+      Уже есть аккаунт? <NuxtLink to="login">
+        Войти
       </NuxtLink>
     </p>
   </div>
@@ -43,12 +43,3 @@ async function onSubmit () {
   }
 }
 </script>
-
-<style lang="scss">
-.login-form-container {
-  padding: 120px 0 40px 0;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-</style>
