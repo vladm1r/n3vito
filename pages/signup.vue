@@ -1,27 +1,39 @@
 <template>
-  <div class="login-form-container">
-    <c-toast />
+  <div>
+    <div v-if="!state.isSuccess" class="login-form-container">
+      <c-toast />
 
-    <FormKit
-      type="form"
-      submit-label="Зарегистрироваться"
-      @submit="onSubmit"
-    >
       <FormKit
-        v-model="email"
-        type="email"
-        label="Ваша почта"
-      />
-      <FormKit
-        v-model="password"
-        type="password"
-        label="Ваш пароль"
-      />
-    </FormKit>
+        type="form"
+        submit-label="Зарегистрироваться"
+        @submit="onSubmit"
+      >
+        <FormKit
+          v-model="email"
+          type="email"
+          validation="email|required"
+          label="Ваша почта"
+        />
+        <FormKit
+          v-model="password"
+          type="password"
+          label="Ваш пароль"
+          validation="length:6,16|required"
+        />
+      </FormKit>
 
-    <p>
-      Уже есть аккаунт? <NuxtLink to="login">
-        Войти
+      <p>
+        Уже есть аккаунт?
+        <NuxtLink to="login">
+          Войти
+        </NuxtLink>
+      </p>
+    </div>
+
+    <p v-else>
+      Регистрация прошла успешно. Письмо с подтверждением отправлено на вашу почту {{ email }} <br>
+      <NuxtLink to="/">
+        На главную
       </NuxtLink>
     </p>
   </div>
@@ -30,6 +42,8 @@
 <script setup lang="ts">
 import { useToast } from 'primevue/usetoast'
 const client = useSupabaseAuthClient()
+
+const state = reactive({ isSuccess: true })
 
 const toast = useToast()
 const email = ref('')
@@ -44,6 +58,8 @@ async function onSubmit () {
 
     if (response.error) {
       throw new Error(response.error.message)
+    } else {
+      state.isSuccess = true
     }
   } catch (error) {
     toast.add({ severity: 'error', summary: 'Ошибка регистрации', detail: 'Что-то пошло не так', life: 3000 })
