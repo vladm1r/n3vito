@@ -1,5 +1,7 @@
 <template>
   <div class="login-form-container">
+    <c-toast />
+
     <FormKit
       type="form"
       submit-label="Зарегистрироваться"
@@ -26,7 +28,10 @@
 </template>
 
 <script setup lang="ts">
+import { useToast } from 'primevue/usetoast'
 const client = useSupabaseAuthClient()
+
+const toast = useToast()
 const email = ref('')
 const password = ref('')
 
@@ -37,9 +42,11 @@ async function onSubmit () {
       password: password.value
     })
 
-    console.log(response)
+    if (response.error) {
+      throw new Error(response.error.message)
+    }
   } catch (error) {
-
+    toast.add({ severity: 'error', summary: 'Ошибка регистрации', detail: 'Что-то пошло не так', life: 3000 })
   }
 }
 </script>
