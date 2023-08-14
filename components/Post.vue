@@ -1,3 +1,14 @@
+<script setup lang="ts">
+import type { Post } from 'types'
+
+const postTemplate: Post = {
+  title: 'Супер гитара',
+  price: 10999,
+  image: '/img/guitar.jpg',
+  description: 'Купите гитару пожалуйста'
+}
+</script>
+
 <template>
   <article class="post">
     <div class="post__header">
@@ -27,18 +38,6 @@
     </div>
   </article>
 </template>
-
-<script setup lang="ts">
-import type { Post } from 'types'
-
-const postTemplate: Post = {
-  title: 'Супер гитара',
-  price: 10999,
-  image: '/img/guitar.jpg',
-  description: 'Купите гитару пожалуйста'
-}
-
-</script>
 
 <style lang="scss">
 .post {
@@ -102,5 +101,4 @@ const postTemplate: Post = {
     font-size: $font-size-main;
   }
 }
-
 </style>

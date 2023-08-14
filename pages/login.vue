@@ -1,3 +1,22 @@
+<script setup lang="ts">
+const client = useSupabaseAuthClient()
+const email = ref('')
+const password = ref('')
+
+async function onSubmit () {
+  try {
+    const response = await client.auth.signUp({
+      email: email.value,
+      password: password.value
+    })
+
+    console.log(response)
+  } catch (error) {
+
+  }
+}
+</script>
+
 <template>
   <div class="login-form-container">
     <FormKit
@@ -24,25 +43,6 @@
     </p>
   </div>
 </template>
-
-<script setup lang="ts">
-const client = useSupabaseAuthClient()
-const email = ref('')
-const password = ref('')
-
-async function onSubmit () {
-  try {
-    const response = await client.auth.signUp({
-      email: email.value,
-      password: password.value
-    })
-
-    console.log(response)
-  } catch (error) {
-
-  }
-}
-</script>
 
 <style lang="scss">
 .login-form-container {

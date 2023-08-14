@@ -1,30 +1,3 @@
-<template>
-  <div class="menu-container">
-    <c-button
-      v-if="!state.isLogged"
-      type="button"
-      label="Вход"
-      icon="pi pi-user"
-      outlined
-      @click="toggleLogin"
-    />
-
-    <c-button
-      v-else
-      type="button"
-      aria-haspopup="true"
-      aria-controls="overlay_menu"
-      class="menu-button"
-      rounded
-      @click="toggle"
-    >
-      <c-avatar :image="menuAvatarSource" shape="circle" size="large" />
-    </c-button>
-
-    <c-menu id="overlay_menu" ref="menu" :model="menuItems" :popup="true" />
-  </div>
-</template>
-
 <script setup lang="ts">
 import type { User, MenuItem } from 'types'
 
@@ -65,6 +38,33 @@ const toggle = (event:Event) => {
   menu.value.toggle(event)
 }
 </script>
+
+<template>
+  <div class="menu-container">
+    <c-button
+      v-if="!state.isLogged"
+      type="button"
+      label="Вход"
+      icon="pi pi-user"
+      outlined
+      @click="toggleLogin"
+    />
+
+    <c-button
+      v-else
+      type="button"
+      aria-haspopup="true"
+      aria-controls="overlay_menu"
+      class="menu-button"
+      rounded
+      @click="toggle"
+    >
+      <c-avatar :image="menuAvatarSource" shape="circle" size="large" />
+    </c-button>
+
+    <c-menu id="overlay_menu" ref="menu" :model="menuItems" :popup="true" />
+  </div>
+</template>
 
 <style>
 .menu-container {

@@ -1,3 +1,31 @@
+<script setup lang="ts">
+import { useToast } from 'primevue/usetoast'
+const client = useSupabaseAuthClient()
+
+const state = reactive({ isSuccess: true })
+
+const toast = useToast()
+const email = ref('')
+const password = ref('')
+
+async function onSubmit () {
+  try {
+    const response = await client.auth.signUp({
+      email: email.value,
+      password: password.value
+    })
+
+    if (response.error) {
+      throw new Error(response.error.message)
+    } else {
+      state.isSuccess = true
+    }
+  } catch (error) {
+    toast.add({ severity: 'error', summary: 'Ошибка регистрации', detail: 'Что-то пошло не так', life: 3000 })
+  }
+}
+</script>
+
 <template>
   <div>
     <div v-if="!state.isSuccess" class="login-form-container">
@@ -38,31 +66,3 @@
     </p>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useToast } from 'primevue/usetoast'
-const client = useSupabaseAuthClient()
-
-const state = reactive({ isSuccess: true })
-
-const toast = useToast()
-const email = ref('')
-const password = ref('')
-
-async function onSubmit () {
-  try {
-    const response = await client.auth.signUp({
-      email: email.value,
-      password: password.value
-    })
-
-    if (response.error) {
-      throw new Error(response.error.message)
-    } else {
-      state.isSuccess = true
-    }
-  } catch (error) {
-    toast.add({ severity: 'error', summary: 'Ошибка регистрации', detail: 'Что-то пошло не так', life: 3000 })
-  }
-}
-</script>

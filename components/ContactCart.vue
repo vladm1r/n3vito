@@ -1,3 +1,14 @@
+<script setup lang="ts">
+import type { User } from 'types'
+
+const testUser:User = {
+  name: 'Иван Иванов',
+  phone: '+79035748779',
+  avatar: '/img/kotik.jpg'
+}
+
+</script>
+
 <template>
   <div class="contact-cart">
     <div>
@@ -10,17 +21,6 @@
     <c-avatar :image="testUser.avatar" shape="circle" />
   </div>
 </template>
-
-<script setup lang="ts">
-import type { User } from 'types'
-
-const testUser:User = {
-  name: 'Иван Иванов',
-  phone: '+79035748779',
-  avatar: '/img/kotik.jpg'
-}
-
-</script>
 
 <style lang="scss">
 .contact-cart {

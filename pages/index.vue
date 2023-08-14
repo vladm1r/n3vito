@@ -1,7 +1,7 @@
+<script setup lang="ts" />
+
 <template>
   <Post />
 </template>
-
-<script setup lang="ts" />
 
 <style />
