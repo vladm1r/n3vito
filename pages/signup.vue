@@ -2,7 +2,7 @@
 import { useToast } from 'primevue/usetoast'
 const client = useSupabaseAuthClient()
 
-const state = reactive({ isSuccess: true })
+const state = reactive({ isSuccess: false })
 
 const toast = useToast()
 const email = ref('')
@@ -15,13 +15,16 @@ async function onSubmit () {
       password: password.value
     })
 
+    console.log('log', response)
+
     if (response.error) {
       throw new Error(response.error.message)
     } else {
       state.isSuccess = true
     }
   } catch (error) {
-    toast.add({ severity: 'error', summary: 'Ошибка регистрации', detail: 'Что-то пошло не так', life: 3000 })
+    console.log('log', error)
+    toast.add({ severity: 'error', summary: 'Ошибка регистрации', detail: getErrorMessage(error), life: 3000 })
   }
 }
 </script>
