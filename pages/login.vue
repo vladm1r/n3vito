@@ -16,7 +16,7 @@ async function onSubmit () {
     if (response.error) {
       throw new Error(response.error.message)
     } else {
-      console.log('in')
+      navigateTo('/')
     }
   } catch (error) {
     toast.add({ severity: 'error', summary: 'Ошибка авторизации', detail: getErrorMessage(error), life: 3000 })
