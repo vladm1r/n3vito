@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { User, MenuItem } from 'types'
 
-const state = reactive({ isLogged: false })
+const isLogged = ref(false)
 
 const menu = ref()
 
@@ -27,11 +27,11 @@ const testUser:User = {
 }
 
 const menuAvatarSource = computed<string | undefined>(() => {
-  return state.isLogged ? testUser.avatar : '/img/avatar-default.png'
+  return isLogged.value ? testUser.avatar : '/img/avatar-default.png'
 })
 
 const toggleLogin = () => {
-  state.isLogged = !state.isLogged
+  isLogged.value = !isLogged.value
 }
 
 const toggle = (event:Event) => {
@@ -42,7 +42,7 @@ const toggle = (event:Event) => {
 <template>
   <div class="menu-container">
     <c-button
-      v-if="!state.isLogged"
+      v-if="!isLogged"
       type="button"
       label="Вход"
       icon="pi pi-user"

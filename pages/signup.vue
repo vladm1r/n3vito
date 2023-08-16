@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useToast } from 'primevue/usetoast'
+const toast = useToast()
 const client = useSupabaseAuthClient()
 
-const state = reactive({ isSuccess: false })
+const isSuccess = ref(false)
 
-const toast = useToast()
 const email = ref('')
 const password = ref('')
 
@@ -15,23 +15,20 @@ async function onSubmit () {
       password: password.value
     })
 
-    console.log('log', response)
-
     if (response.error) {
       throw new Error(response.error.message)
     } else {
-      state.isSuccess = true
+      isSuccess.value = true
     }
   } catch (error) {
-    console.log('log', error)
     toast.add({ severity: 'error', summary: 'Ошибка регистрации', detail: getErrorMessage(error), life: 3000 })
   }
 }
 </script>
 
 <template>
-  <div>
-    <div v-if="!state.isSuccess" class="login-form-container">
+  <div class="login-form-container">
+    <div v-if="!state.isSuccess">
       <c-toast />
 
       <FormKit
