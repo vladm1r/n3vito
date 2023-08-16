@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useToast } from 'primevue/usetoast'
-const client = useSupabaseAuthClient()
 const toast = useToast()
+const client = useSupabaseAuthClient()
 
 const email = ref('')
 const password = ref('')
@@ -56,8 +56,5 @@ async function onSubmit () {
 <style lang="scss">
 .login-form-container {
   padding: 120px 0 40px 0;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
 }
 </style>
