@@ -28,7 +28,7 @@ async function onSubmit () {
 
 <template>
   <div class="login-form-container">
-    <div v-if="!state.isSuccess">
+    <div v-if="!isSuccess">
       <c-toast />
 
       <FormKit
