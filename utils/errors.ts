@@ -1,8 +1,9 @@
+const DEFAULT_ERROR_MESSAGE:String = 'Что-то пошло не так'
+
 export function getErrorMessage (error: unknown): String {
-  let message = 'Что-то пошло не так'
   if (error instanceof Error) {
-    message = error.message
+    return error.message
   }
 
-  return message
+  return DEFAULT_ERROR_MESSAGE
 }
