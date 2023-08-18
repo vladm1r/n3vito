@@ -29,7 +29,7 @@ async function onSubmit () {
 <template>
   <div class="login-form-container">
     <div v-if="!isSuccess">
-      <c-toast />
+      <CToast />
 
       <FormKit
         type="form"

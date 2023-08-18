@@ -18,7 +18,7 @@ const testUser:User = {
       <a :href="`tel:${testUser.phone}`" class="contact-cart__phone"> {{ testUser.phone }}</a>
     </div>
 
-    <c-avatar :image="testUser.avatar" shape="circle" />
+    <CAvatar :image="testUser.avatar" shape="circle" />
   </div>
 </template>
 

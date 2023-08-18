@@ -22,7 +22,7 @@ const postTemplate: Post = {
     <div class="post__body">
       <div>
         <div class="post__img-container">
-          <c-image image-class="post__img" :src="postTemplate.image" />
+          <CImage image-class="post__img" :src="postTemplate.image" />
         </div>
 
         <h3 class="post__description-title">

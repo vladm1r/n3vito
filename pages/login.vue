@@ -26,7 +26,7 @@ async function onSubmit () {
 
 <template>
   <div class="login-form-container">
-    <c-toast />
+    <CToast />
 
     <FormKit
       type="form"

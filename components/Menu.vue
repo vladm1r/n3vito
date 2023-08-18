@@ -41,7 +41,7 @@ const toggle = (event:Event) => {
 
 <template>
   <div class="menu-container">
-    <c-button
+    <CButton
       v-if="!isLogged"
       type="button"
       label="Вход"
@@ -50,7 +50,7 @@ const toggle = (event:Event) => {
       @click="toggleLogin"
     />
 
-    <c-button
+    <CButton
       v-else
       type="button"
       aria-haspopup="true"
@@ -59,10 +59,10 @@ const toggle = (event:Event) => {
       rounded
       @click="toggle"
     >
-      <c-avatar :image="menuAvatarSource" shape="circle" size="large" />
-    </c-button>
+      <CAvatar :image="menuAvatarSource" shape="circle" size="large" />
+    </CButton>
 
-    <c-menu id="overlay_menu" ref="menu" :model="menuItems" :popup="true" />
+    <CMenu id="overlay_menu" ref="menu" :model="menuItems" :popup="true" />
   </div>
 </template>
 
