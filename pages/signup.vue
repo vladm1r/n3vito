@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useToast } from 'primevue/usetoast'
 const toast = useToast()
-const client = useSupabaseAuthClient()
+const client = useSupabaseClient()
 
 const isSuccess = ref(false)
 
