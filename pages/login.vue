@@ -26,8 +26,6 @@ async function onSubmit () {
 
 <template>
   <div class="login-form-container">
-    <CToast />
-
     <FormKit
       type="form"
       submit-label="Войти"

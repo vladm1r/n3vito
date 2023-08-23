@@ -29,8 +29,6 @@ async function onSubmit () {
 <template>
   <div class="login-form-container">
     <div v-if="!isSuccess">
-      <CToast />
-
       <FormKit
         type="form"
         submit-label="Зарегистрироваться"
