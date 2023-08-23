@@ -14,3 +14,11 @@ export interface MenuItem {
   label: string,
   icon: string,
 }
+
+export type FileUploadSelectEvent = {
+  originalEvent: Event
+}
+
+export enum Storages {
+  AVATARS = 'avatars',
+}
