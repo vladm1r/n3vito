@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useToast } from 'primevue/usetoast'
+import { Storages } from '../types'
+
 const props = defineProps<{
   modelValue: string
 }>()
@@ -6,58 +9,34 @@ const props = defineProps<{
 const emit = defineEmits(['update:modelValue'])
 
 const supabase = useSupabaseClient()
+const toast = useToast()
 
-const uploading = ref(false)
-const src = ref('')
-const files = ref()
+const imageSource = ref('')
+
+const onAvatarUpload = (avatarPath:string) => {
+  emit('update:modelValue', avatarPath)
+}
 
 const downloadImage = async () => {
-  if (!props.modelValue) {
-    return
-  }
-
   try {
-    const { data, error } = await supabase.storage.from('avatars').download(props.modelValue)
-    if (error) { throw error }
-    src.value = URL.createObjectURL(data)
-  } catch (error) {
-    console.error('Error downloading image: ', error.message)
-  }
-}
-
-const uploadAvatar = async (e) => {
-  files.value = e.originalEvent.target.files
-
-  try {
-    uploading.value = true
-
-    if (!files.value || files.value.length === 0) {
-      // throw new Error('You must select an image to upload.')
-    }
-
-    const file = files.value[0]
-    const filePath = createFileName(file)
-
-    const result = await supabase.storage.from('avatars').upload(filePath, file)
-
+    const result = await supabase.storage.from(Storages.AVATARS).download(props.modelValue)
     if (!result.error) {
-      emit('update:modelValue', filePath)
+      imageSource.value = URL.createObjectURL(result.data)
+    } else {
+      throw new Error(result.error.message)
     }
   } catch (error) {
-    alert(error.message)
-  } finally {
-    uploading.value = false
+    toast.add({ severity: 'error', summary: 'Ошибка загрузки изображения', detail: getErrorMessage(error), life: 3000 })
   }
 }
-
-const createFileName = (file):string => {
-  const fileExt = file.name.split('.').pop()
-  return `${Math.random()}.${fileExt}`
-}
-
-downloadImage()
 
 watch(() => props.modelValue, () => {
+  if (props.modelValue) {
+    downloadImage()
+  }
+})
+
+onMounted(() => {
   if (props.modelValue) {
     downloadImage()
   }
@@ -65,40 +44,36 @@ watch(() => props.modelValue, () => {
 </script>
 
 <template>
-  <div>
+  <div class="upload-avatar">
+    <label class="upload-avatar__label">
+      Выберите изображение для аватара
+    </label>
+
     <img
-      v-if="src"
-      :src="src"
+      v-if="imageSource"
+      :src="imageSource"
       alt="Avatar"
-      class="avatar image"
-      style="width: 10em; height: 10em;"
+      class="upload-avatar__image"
     >
-    <!-- <div v-else class="avatar no-image" :style="{ height: 100, width: 100 }" /> -->
 
-    <div style="width: 10em; position: relative;">
-      <label class="button primary block" for="single">
-        {{ uploading ? 'Uploading ...' : 'Upload' }}
-        <input
-          id="single"
-          style="position: absolute; visibility: hidden;"
-          type="file"
-          accept="image/*"
-          :disabled="uploading"
-          @change="uploadAvatar"
-        >
-      </label>
-
-      <CFileUpload
-        mode="basic"
-        accept="image/*"
-        :max-file-size="1000000"
-        custom-upload
-        @select="uploadAvatar"
-      />
-    </div>
+    <FileUploader :storage="Storages.AVATARS" @update:file-path="onAvatarUpload" />
   </div>
 </template>
 
 <style lang="scss">
+.upload-avatar {
+  margin-bottom: 12px;
 
+  &__label {
+    display: block;
+    font-size: $font-size-main;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  &__image {
+    width: 100px;
+    margin-bottom: 8px;
+  }
+}
 </style>
