@@ -4,6 +4,12 @@ export interface User {
   phone: string
 }
 
+export interface Profile {
+  full_name: string,
+  phone: string
+  avatar_url: string,
+}
+
 export interface Post {
   title: string,
   price: number,
