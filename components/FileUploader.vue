@@ -14,7 +14,9 @@ const props = withDefaults(defineProps<Props>(), {
   maxFileSize: 100000
 })
 
-const emit = defineEmits(['update:filePath'])
+const emit = defineEmits<{
+  update: [filePath: string]
+}>()
 
 const supabase = useSupabaseClient()
 const toast = useToast()
@@ -28,7 +30,7 @@ const uploadFile = async (event:FileUploadSelectEvent) => {
     const result = await supabase.storage.from(props.storage).upload(filePath, file)
 
     if (!result.error) {
-      emit('update:filePath', filePath)
+      emit('update', filePath)
     } else {
       throw new Error(result.error.message)
     }

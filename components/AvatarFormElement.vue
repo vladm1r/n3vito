@@ -6,7 +6,9 @@ const props = defineProps<{
   modelValue: string
 }>()
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits<{
+  'update:modelValue': [modelValue: string]
+}>()
 
 const supabase = useSupabaseClient()
 const toast = useToast()
@@ -56,7 +58,7 @@ onMounted(() => {
       class="upload-avatar__image"
     >
 
-    <FileUploader :storage="Storages.AVATARS" @update:file-path="onAvatarUpload" />
+    <FileUploader :storage="Storages.AVATARS" @update="onAvatarUpload" />
   </div>
 </template>
 
