@@ -13,8 +13,9 @@ export interface Profile {
 export interface Post {
   title: string,
   price: number,
-  image?: string,
-  description?: string
+  image_url: string,
+  description: string,
+  user_id: string,
 }
 export interface MenuItem {
   label: string,
@@ -27,4 +28,5 @@ export type FileUploadSelectEvent = {
 
 export enum Storages {
   AVATARS = 'avatars',
+  IMAGES = 'images',
 }
