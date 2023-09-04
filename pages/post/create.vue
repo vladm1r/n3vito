@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { useToast } from 'primevue/usetoast'
-import type { Post } from '../../types'
+import type { newPost } from '../../types'
 
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
 const toast = useToast()
 
-const post:Post = reactive({
+const post:newPost = reactive({
   title: '',
   price: 0,
   image_url: '',
@@ -26,7 +26,7 @@ const createPost = async () => {
       throw new Error(result.error.message)
     }
   } catch (error) {
-    toast.add({ severity: 'error', summary: 'Ошибка загрузки изображения', detail: getErrorMessage(error), life: 3000 })
+    toast.add({ severity: 'error', summary: 'Ошибка при создании', detail: getErrorMessage(error), life: 3000 })
   }
 }
 

@@ -14,8 +14,15 @@ export interface Post {
   title: string,
   price: number,
   image_url: string,
-  description: string,
-  user_id: string,
+  description: string
+}
+
+export interface newPost extends Post {
+  user_id: string
+}
+
+export interface createdPost extends Post {
+  created_at?: Date
 }
 export interface MenuItem {
   label: string,
