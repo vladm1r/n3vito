@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { useToast } from 'primevue/usetoast'
 import { Storages } from '../types'
 
-const props = defineProps<{
+defineProps<{
   modelValue: string
 }>()
 
@@ -10,39 +9,9 @@ const emit = defineEmits<{
   'update:modelValue': [modelValue: string]
 }>()
 
-const supabase = useSupabaseClient()
-const toast = useToast()
-
-const imageSource = ref('')
-
 const onImageUpload = (imagePath:string) => {
   emit('update:modelValue', imagePath)
 }
-
-const downloadImage = async () => {
-  try {
-    const result = await supabase.storage.from(Storages.IMAGES).download(props.modelValue)
-    if (!result.error) {
-      imageSource.value = URL.createObjectURL(result.data)
-    } else {
-      throw new Error(result.error.message)
-    }
-  } catch (error) {
-    toast.add({ severity: 'error', summary: 'Ошибка загрузки изображения', detail: getErrorMessage(error), life: 3000 })
-  }
-}
-
-watch(() => props.modelValue, () => {
-  if (props.modelValue) {
-    downloadImage()
-  }
-})
-
-onMounted(() => {
-  if (props.modelValue) {
-    downloadImage()
-  }
-})
 </script>
 
 <template>
@@ -51,12 +20,13 @@ onMounted(() => {
       Выберите изображение для объявления
     </label>
 
-    <img
-      v-if="imageSource"
-      :src="imageSource"
-      alt="Post image"
-      class="upload-image__image"
-    >
+    <RemoteImageProvider v-slot="image" :image-url="modelValue" :storage="Storages.IMAGES">
+      <img
+        :src="image.src"
+        alt="Post image"
+        class="upload-image__image"
+      >
+    </RemoteImageProvider>
 
     <FileUploader :storage="Storages.IMAGES" @update="onImageUpload" />
   </div>
