@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import type { User } from 'types'
+import type { Profile } from 'types'
+import { Storages } from '@/types'
 
-const testUser:User = {
-  name: 'Иван Иванов',
-  phone: '+79035748779',
-  avatar: '/img/kotik.jpg'
-}
-
+defineProps<{
+  data: Profile
+}>()
 </script>
 
 <template>
   <div class="contact-cart">
     <div>
       <h4 class="contact-cart__name">
-        {{ testUser.name }}
+        {{ data.full_name }}
       </h4>
-      <a :href="`tel:${testUser.phone}`" class="contact-cart__phone"> {{ testUser.phone }}</a>
+      <a :href="`tel:${data.phone}`" class="contact-cart__phone"> {{ data.phone }}</a>
     </div>
 
-    <CAvatar :image="testUser.avatar" shape="circle" />
+    <RemoteImageProvider v-slot="image" :image-url="data.avatar_url" :storage="Storages.AVATARS">
+      <CAvatar :image="image.src" shape="circle" />
+    </RemoteImageProvider>
   </div>
 </template>
 

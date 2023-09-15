@@ -1,40 +1,40 @@
 <script setup lang="ts">
-import type { Post } from 'types'
+import { Storages } from '../types'
+import type { createdPost } from 'types'
 
-const postTemplate: Post = {
-  title: 'Супер гитара',
-  price: 10999,
-  image: '/img/guitar.jpg',
-  description: 'Купите гитару пожалуйста'
-}
+defineProps<{
+  data: createdPost
+}>()
 </script>
 
 <template>
   <article class="post">
     <div class="post__header">
       <h1 class="post__title">
-        {{ postTemplate.title }}
+        {{ data.title }}
       </h1>
 
-      <PriceDisplay :value="postTemplate.price" class="post__price" />
+      <PriceDisplay :value="data.price" class="post__price" />
     </div>
 
     <div class="post__body">
       <div>
-        <div class="post__img-container">
-          <CImage image-class="post__img" :src="postTemplate.image" />
-        </div>
+        <RemoteImageProvider v-slot="image" :image-url="data.image_url" :storage="Storages.IMAGES">
+          <div class="post__img-container">
+            <CImage image-class="post__img" :src="image.src" />
+          </div>
+        </RemoteImageProvider>
 
         <h3 class="post__description-title">
           Описание
         </h3>
 
         <p class="post__desctiption">
-          {{ postTemplate.description }}
+          {{ data.description }}
         </p>
       </div>
 
-      <ContactCart />
+      <slot name="sidebar" />
     </div>
   </article>
 </template>
