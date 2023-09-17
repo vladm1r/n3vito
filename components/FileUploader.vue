@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useToast } from 'primevue/usetoast'
 import type { FileUploadSelectEvent } from '../node_modules/primevue/fileupload'
-import { Storages } from '../types'
+import { Storages } from '@/types'
 
 interface Props {
   accept?: string
@@ -21,12 +21,19 @@ const emit = defineEmits<{
 const supabase = useSupabaseClient()
 const toast = useToast()
 
+const isLoading = ref(false)
+
 const uploadFile = async (event:FileUploadSelectEvent) => {
-  const target = event.originalEvent.target as HTMLInputElement
-  const file = (target.files as FileList)[0]
+  const file = (event.files as FileList)[0]
+  if (!file) {
+    return
+  }
+
   const filePath = createFileName(file)
 
   try {
+    isLoading.value = true
+
     const result = await supabase.storage.from(props.storage).upload(filePath, file)
 
     if (!result.error) {
@@ -36,6 +43,8 @@ const uploadFile = async (event:FileUploadSelectEvent) => {
     }
   } catch (error) {
     toast.add({ severity: 'error', summary: 'Ошибка загрузки файла', detail: getErrorMessage(error), life: 3000 })
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -46,7 +55,10 @@ const createFileName = (file:File):string => {
 </script>
 
 <template>
+  <LoadSpinner v-if="isLoading" />
+
   <CFileUpload
+    v-else
     mode="basic"
     :accept="props.accept"
     :max-file-size="props.maxFileSize"

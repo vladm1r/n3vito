@@ -13,12 +13,12 @@ const profile:Profile = reactive({
 
 const toast = useToast()
 
-onBeforeMount(() => {
-  getProfileData()
-})
+const isLoading = ref(false)
 
 const getProfileData = async () => {
   try {
+    isLoading.value = true
+
     const result = await supabase
       .from('profiles')
       .select('full_name, phone, avatar_url')
@@ -34,6 +34,8 @@ const getProfileData = async () => {
     }
   } catch (error) {
     toast.add({ severity: 'error', summary: 'Ошибка обновления профиля', detail: getErrorMessage(error), life: 3000 })
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -59,10 +61,14 @@ const updateProfile = async () => {
   }
 }
 
+getProfileData()
 </script>
 
 <template>
+  <LoadSpinner v-if="isLoading" />
+
   <FormKit
+    v-else
     type="form"
     submit-label="Обновить"
     @submit="updateProfile"

@@ -19,8 +19,12 @@ const author:Profile = reactive({
   phone: ''
 })
 
+const isLoading = ref(false)
+
 const getPost = async () => {
   try {
+    isLoading.value = true
+
     const result = await supabase
       .from('posts')
       .select('title, price, image_url, description, profiles(full_name, phone, avatar_url)').eq('id', route.params.id)
@@ -40,6 +44,8 @@ const getPost = async () => {
     }
   } catch (error) {
     toast.add({ severity: 'error', summary: 'Ошибка при получении данных', detail: getErrorMessage(error), life: 3000 })
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -48,7 +54,9 @@ getPost()
 </script>
 
 <template>
-  <Post :data="post">
+  <LoadSpinner v-if="isLoading" />
+
+  <Post v-else :data="post">
     <template #sidebar>
       <ContactCart :data="author" />
     </template>

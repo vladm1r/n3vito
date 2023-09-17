@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useToast } from 'primevue/usetoast'
-import type { createdPost } from '@/types'
+import type { createdPost } from 'types'
 
 const supabase = useSupabaseClient()
 const toast = useToast()
@@ -13,8 +13,12 @@ const post:createdPost = reactive({
   description: ''
 })
 
+const isLoading = ref(false)
+
 const getPost = async () => {
   try {
+    isLoading.value = true
+
     const result = await supabase
       .from('posts')
       .select().eq('id', route.params.id)
@@ -30,6 +34,8 @@ const getPost = async () => {
     }
   } catch (error) {
     toast.add({ severity: 'error', summary: 'Ошибка при получении данных', detail: getErrorMessage(error), life: 3000 })
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -55,7 +61,10 @@ getPost()
 </script>
 
 <template>
+  <LoadSpinner v-if="isLoading" />
+
   <FormKit
+    v-else
     type="form"
     submit-label="обновить"
     @submit="updatePost"
@@ -81,7 +90,3 @@ getPost()
     />
   </FormKit>
 </template>
-
-<style>
-
-</style>
