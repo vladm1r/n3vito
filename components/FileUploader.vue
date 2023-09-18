@@ -58,7 +58,7 @@ const createFileName = (file:File):string => {
   <LoadSpinner v-if="isLoading" />
 
   <CFileUpload
-    v-else
+    v-show="!isLoading"
     mode="basic"
     :accept="props.accept"
     :max-file-size="props.maxFileSize"
