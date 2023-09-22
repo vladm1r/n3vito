@@ -30,31 +30,36 @@ defineProps<{
 
 <style lang="scss">
 .post-preview {
-  border: 1px solid #000;
+  border: 1px solid $color-primary;
+  border-radius: $border-radius;
   padding: 20px;
   margin-bottom: 20px;
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 20px;
 
+  @media (max-width: $bp-mobile) {
+    display: block;
+  }
+
   &__image-container {
     img {
       max-width: 100%;
     }
+
+    @media (max-width: $bp-mobile) {
+      margin-bottom: 20px;
+    }
   }
 
   &__title {
-    font-size: 28px;
+    font-size: $font-size-2xl;
     font-weight: 700;
     margin: 0 0 12px 0;
   }
 
   &__price {
-    font-size: 24px;
-  }
-
-  &__description {
-    font-size: 16px;
+    font-size: $font-size-xl;
   }
 }
 
