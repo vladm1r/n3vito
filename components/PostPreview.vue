@@ -25,14 +25,19 @@ defineProps<{
         {{ data.description }}
       </p>
     </div>
+
+    <div class="post-preview__menu-container">
+      <slot name="menu" />
+    </div>
   </div>
 </template>
 
 <style lang="scss">
 .post-preview {
+  position: relative;
   border: 1px solid $color-primary;
   border-radius: $border-radius;
-  padding: 20px;
+  padding: 20px 40px 20px 20px;
   margin-bottom: 20px;
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -60,6 +65,12 @@ defineProps<{
 
   &__price {
     font-size: $font-size-xl;
+  }
+
+  &__menu-container {
+    position: absolute;
+    right: 12px;
+    top: 20px;
   }
 }
 
