@@ -19,10 +19,17 @@ export default defineNuxtConfig({
     'primevue/resources/primevue.css',
     'primeicons/primeicons.css'
   ],
-  build: {
-    transpile: ['primevue']
+  modules: ['@formkit/nuxt', '@nuxtjs/supabase', 'nuxt-vitest', 'nuxt-primevue'],
+  primevue: {
+    usePrimeVue: true,
+    components: {
+      prefix: 'C',
+      include: ['Avatar', 'Button', 'FileUpload', 'Image', 'Menu', 'Toast']
+    },
+    composables: {
+      include: ['useToast']
+    }
   },
-  modules: ['@formkit/nuxt', '@nuxtjs/supabase', 'nuxt-vitest'],
   vite: {
     css: {
       preprocessorOptions: {
