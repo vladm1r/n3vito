@@ -1,10 +1,19 @@
 <script setup lang="ts">
-import { Storages } from '@/types'
 import type { createdPost } from 'types'
+import { ElNotification } from 'element-plus'
+import { Storages } from '@/types'
 
 defineProps<{
   data: createdPost
 }>()
+
+const testNotify = () => {
+  ElNotification({
+    title: 'Error',
+    message: 'This is an error message',
+    type: 'error'
+  })
+}
 </script>
 
 <template>
@@ -32,6 +41,10 @@ defineProps<{
         <p class="post__desctiption">
           {{ data.description }}
         </p>
+
+        <el-button @click="testNotify">
+          TEST
+        </el-button>
       </div>
 
       <slot name="sidebar" />

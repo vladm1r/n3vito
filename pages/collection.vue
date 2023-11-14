@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { useToast } from 'primevue/usetoast'
+import { ElNotification } from 'element-plus'
 import type { createdPost } from 'types'
 
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
-const toast = useToast()
 
 const posts = ref([])
 
@@ -24,7 +23,7 @@ const getPosts = async () => {
       throw new Error(result.error.message)
     }
   } catch (error) {
-    toast.add({ severity: 'error', summary: 'Ошибка при получении данных', detail: getErrorMessage(error), life: 3000 })
+    ElNotification({ type: 'error', title: 'Ошибка при получении данных', message: getErrorMessage(error) })
   } finally {
     isLoading.value = false
   }

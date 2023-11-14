@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useToast } from 'primevue/usetoast'
+import { ElNotification } from 'element-plus'
 import type { createdPost } from 'types'
 
 const supabase = useSupabaseClient()
-const toast = useToast()
+
 const route = useRoute()
 
 const post:createdPost = reactive({
@@ -33,7 +33,7 @@ const getPost = async () => {
       throw new Error(result.error.message)
     }
   } catch (error) {
-    toast.add({ severity: 'error', summary: 'Ошибка при получении данных', detail: getErrorMessage(error), life: 3000 })
+    ElNotification({ type: 'error', title: 'Ошибка при получении данных', message: getErrorMessage(error) })
   } finally {
     isLoading.value = false
   }
@@ -47,12 +47,12 @@ const updatePost = async () => {
       .eq('id', route.params.id)
 
     if (!result.error) {
-      toast.add({ severity: 'success', summary: 'Успех', detail: 'Объявление обновлено', life: 3000 })
+      ElNotification({ type: 'success', title: 'Успех', message: 'Объявление обновлено' })
     } else {
       throw new Error(result.error.message)
     }
   } catch (error) {
-    toast.add({ severity: 'error', summary: 'Ошибка при обновлении', detail: getErrorMessage(error), life: 3000 })
+    ElNotification({ type: 'error', title: 'Ошибка при обновлении', message: getErrorMessage(error) })
   }
 }
 

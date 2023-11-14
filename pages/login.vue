@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useToast } from 'primevue/usetoast'
-const toast = useToast()
+import { ElNotification } from 'element-plus'
+
 const client = useSupabaseClient()
 
 const email = ref('')
@@ -19,7 +19,7 @@ async function onSubmit () {
       navigateTo('/')
     }
   } catch (error) {
-    toast.add({ severity: 'error', summary: 'Ошибка авторизации', detail: getErrorMessage(error), life: 3000 })
+    ElNotification({ type: 'error', title: 'Ошибка авторизации', message: getErrorMessage(error) })
   }
 }
 </script>
