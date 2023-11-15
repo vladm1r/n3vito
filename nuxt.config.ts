@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     usePrimeVue: true,
     components: {
       prefix: 'C',
-      include: ['Avatar', 'Button', 'FileUpload', 'Image', 'Menu']
+      include: ['Button', 'FileUpload', 'Image', 'Menu']
     }
 
   },

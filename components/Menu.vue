@@ -59,7 +59,7 @@ const toggle = (event:Event) => {
       rounded
       @click="toggle"
     >
-      <CAvatar :image="menuAvatarSource" shape="circle" size="large" />
+      <ElAvatar :src="menuAvatarSource" size="large" />
     </CButton>
 
     <CMenu id="overlay_menu" ref="menu" :model="menuItems" :popup="true" />

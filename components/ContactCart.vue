@@ -17,7 +17,7 @@ defineProps<{
     </div>
 
     <RemoteImageProvider v-slot="image" :image-url="data.avatar_url" :storage="Storages.AVATARS">
-      <CAvatar :image="image.src" shape="circle" />
+      <ElAvatar :src="image.src" />
     </RemoteImageProvider>
   </div>
 </template>
