@@ -28,7 +28,7 @@ const onAvatarUpload = (avatarPath:string) => {
       >
     </RemoteImageProvider>
 
-    <FileUploader :storage="Storages.AVATARS" @update="onAvatarUpload" />
+    <FileUploader :storage="Storages.AVATARS" accept="image/png, image/jpeg" @update="onAvatarUpload" />
   </div>
 </template>
 
