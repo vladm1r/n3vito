@@ -86,12 +86,10 @@ defineProps<{
     background: #b2b2b2;
     text-align: center;
     overflow: hidden;
-  }
 
-  &__img {
-    height: 100%;
-    margin-left: 50%;
-    transform: translate(-50%, 0);
+    .el-image {
+      height: 100%;
+    }
   }
 
   &__description-title {
