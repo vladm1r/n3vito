@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ElNotification } from 'element-plus'
 import type { createdPost } from '@/types'
 import { Storages } from '@/types'
 
@@ -7,13 +6,6 @@ defineProps<{
   data: createdPost
 }>()
 
-const testNotify = () => {
-  ElNotification({
-    title: 'Error',
-    message: 'This is an error message',
-    type: 'error'
-  })
-}
 </script>
 
 <template>
@@ -30,7 +22,7 @@ const testNotify = () => {
       <div>
         <RemoteImageProvider v-slot="image" :image-url="data.image_url" :storage="Storages.IMAGES">
           <div class="post__img-container">
-            <CImage image-class="post__img" :src="image.src" />
+            <ElImage image-class="post__img" :src="image.src" />
           </div>
         </RemoteImageProvider>
 
@@ -41,10 +33,6 @@ const testNotify = () => {
         <p class="post__desctiption">
           {{ data.description }}
         </p>
-
-        <el-button @click="testNotify">
-          TEST
-        </el-button>
       </div>
 
       <slot name="sidebar" />

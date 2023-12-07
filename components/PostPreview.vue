@@ -10,7 +10,7 @@ defineProps<{
   <div class="post-preview">
     <div class="post-preview__image-container">
       <RemoteImageProvider v-slot="image" :image-url="data.image_url" :storage="Storages.IMAGES">
-        <CImage image-class="post-preview__image" :src="image.src" />
+        <ElImage image-class="post-preview__image" :src="image.src" />
       </RemoteImageProvider>
     </div>
 
