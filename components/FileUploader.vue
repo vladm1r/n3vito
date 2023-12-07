@@ -76,9 +76,9 @@ const createFileName = (file:UploadRawFile):string => {
       :limit="1"
       @change="uploadFile"
     >
-      <el-button type="primary" :loading="isLoading">
+      <ElButton type="primary" :loading="isLoading">
         Загрузить
-      </el-button>
+      </ElButton>
 
       <template v-if="fileError" #tip>
         <div class="el-upload__tip">
