@@ -38,7 +38,7 @@ getPosts()
   <div v-else>
     <PostPreview v-for="post in posts" :key="post.id" :data="post">
       <template #menu>
-        <CButton icon="pi pi-file-edit" rounded outlined @click="navigateTo(`/post/update/${post.id}`)" />
+        <ElButton :icon="ElIconEdit" circle @click="navigateTo(`/post/update/${post.id}`)" />
       </template>
     </PostPreview>
   </div>
