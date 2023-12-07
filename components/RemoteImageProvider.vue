@@ -31,10 +31,14 @@ const downloadImage = async () => {
 }
 
 watch(() => props.imageUrl, () => {
-  downloadImage()
+  if (props.imageUrl) {
+    downloadImage()
+  }
 })
 
-downloadImage()
+if (props.imageUrl) {
+  downloadImage()
+}
 </script>
 
 <template>
