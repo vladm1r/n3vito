@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Storages } from '../types'
+import { Storages } from '@/types'
 
 defineProps<{
   modelValue: string

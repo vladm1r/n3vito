@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { User, MenuItem } from 'types'
+import type { User, MenuItem } from '@/types'
 
 const isLogged = ref(false)
 

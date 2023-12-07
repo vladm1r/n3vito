@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Profile } from 'types'
+import type { Profile } from '@/types'
 import { Storages } from '@/types'
 
 defineProps<{

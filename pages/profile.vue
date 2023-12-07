@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ElNotification } from 'element-plus'
-import type { Profile } from '../types'
+import type { Profile } from '@/types'
 
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()

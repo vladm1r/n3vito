@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { createdPost } from 'types'
 import { ElNotification } from 'element-plus'
+import type { createdPost } from '@/types'
 import { Storages } from '@/types'
 
 defineProps<{

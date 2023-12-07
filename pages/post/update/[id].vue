@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ElNotification } from 'element-plus'
-import type { createdPost } from 'types'
+import type { createdPost } from '@/types'
 
 const supabase = useSupabaseClient()
 
