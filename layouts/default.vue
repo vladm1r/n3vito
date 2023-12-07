@@ -2,7 +2,6 @@
   <div>
     <Header />
     <main class="main-container">
-      <CToast />
       <slot />
     </main>
   </div>

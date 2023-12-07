@@ -14,22 +14,7 @@ export default defineNuxtConfig({
       ]
     }
   },
-  css: [
-    'primevue/resources/themes/saga-blue/theme.css',
-    'primevue/resources/primevue.css',
-    'primeicons/primeicons.css'
-  ],
-  modules: ['@formkit/nuxt', '@nuxtjs/supabase', 'nuxt-vitest', 'nuxt-primevue'],
-  primevue: {
-    usePrimeVue: true,
-    components: {
-      prefix: 'C',
-      include: ['Avatar', 'Button', 'FileUpload', 'Image', 'Menu', 'Toast']
-    },
-    composables: {
-      include: ['useToast']
-    }
-  },
+  modules: ['@formkit/nuxt', '@nuxtjs/supabase', 'nuxt-vitest', '@element-plus/nuxt'],
   vite: {
     css: {
       preprocessorOptions: {

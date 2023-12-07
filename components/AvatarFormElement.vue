@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Storages } from '../types'
+import { Storages } from '@/types'
 
 defineProps<{
   modelValue: string
@@ -28,7 +28,7 @@ const onAvatarUpload = (avatarPath:string) => {
       >
     </RemoteImageProvider>
 
-    <FileUploader :storage="Storages.AVATARS" @update="onAvatarUpload" />
+    <FileUploader :storage="Storages.AVATARS" accept="image/png, image/jpeg" @update="onAvatarUpload" />
   </div>
 </template>
 

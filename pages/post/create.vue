@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { useToast } from 'primevue/usetoast'
-import type { newPost } from '../../types'
+import { ElNotification } from 'element-plus'
+import type { newPost } from '@/types'
 
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
-const toast = useToast()
 
 const post:newPost = reactive({
   title: '',
@@ -21,12 +20,12 @@ const createPost = async () => {
       .insert(post)
 
     if (!result.error) {
-      toast.add({ severity: 'success', summary: 'Успех', detail: 'Объявление создано', life: 3000 })
+      ElNotification({ type: 'success', title: 'Успех', message: 'Объявление создано' })
     } else {
       throw new Error(result.error.message)
     }
   } catch (error) {
-    toast.add({ severity: 'error', summary: 'Ошибка при создании', detail: getErrorMessage(error), life: 3000 })
+    ElNotification({ type: 'error', title: 'Ошибка при создании', message: getErrorMessage(error) })
   }
 }
 

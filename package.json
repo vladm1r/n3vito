@@ -10,6 +10,7 @@
     "test": "vitest"
   },
   "devDependencies": {
+    "@element-plus/nuxt": "^1.0.6",
     "@formkit/nuxt": "^0.17.4",
     "@formkit/themes": "^0.17.5",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
@@ -20,9 +21,7 @@
     "happy-dom": "^12.10.3",
     "node-sass": "^8.0.0",
     "nuxt": "^3.8.1",
-    "nuxt-primevue": "^0.2.0",
     "nuxt-vitest": "^0.11.3",
-    "primeicons": "6.0.1",
     "sass": "^1.62.1",
     "sass-loader": "^13.2.2",
     "typescript": "^5.0.4",

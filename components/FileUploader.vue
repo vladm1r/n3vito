@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useToast } from 'primevue/usetoast'
-import type { FileUploadSelectEvent } from '../node_modules/primevue/fileupload'
+import { ElNotification } from 'element-plus'
+import type { UploadInstance, UploadFile, UploadRawFile } from 'element-plus'
 import { Storages } from '@/types'
 
 interface Props {
@@ -19,15 +19,14 @@ const emit = defineEmits<{
 }>()
 
 const supabase = useSupabaseClient()
-const toast = useToast()
 
+const uploadRef = ref<UploadInstance>()
+const fileError = ref('')
 const isLoading = ref(false)
 
-const uploadFile = async (event:FileUploadSelectEvent) => {
-  const file = (event.files as FileList)[0]
-  if (!file) {
-    return
-  }
+const uploadFile = async (uploadFile: UploadFile) => {
+  const file = uploadFile.raw
+  if (!fileValidate(file) || !file) { return }
 
   const filePath = createFileName(file)
 
@@ -42,27 +41,56 @@ const uploadFile = async (event:FileUploadSelectEvent) => {
       throw new Error(result.error.message)
     }
   } catch (error) {
-    toast.add({ severity: 'error', summary: 'Ошибка загрузки файла', detail: getErrorMessage(error), life: 3000 })
+    ElNotification({ type: 'error', title: 'Ошибка загрузки файла', message: getErrorMessage(error) })
   } finally {
     isLoading.value = false
+    fileError.value = ''
   }
 }
 
-const createFileName = (file:File):string => {
+const fileValidate = (file:UploadRawFile|undefined) => {
+  if (!file || (props.accept && !props.accept.includes(file.type))) {
+    fileError.value = `Неправильный тип файла, файл должен быть формата ${props.accept}`
+    return false
+  }
+
+  if (props.maxFileSize && props.maxFileSize < file.size) {
+    fileError.value = `Превышен размер файла, файл должен быть меньше ${props.maxFileSize / 1000}kb`
+    return false
+  }
+
+  return true
+}
+
+const createFileName = (file:UploadRawFile):string => {
   const fileExt = file.name.split('.').pop()
   return `${Math.random()}.${fileExt}`
 }
 </script>
 
 <template>
-  <LoadSpinner v-if="isLoading" />
+  <div class="file-uploader">
+    <ElUpload
+      ref="uploadRef"
+      :accept="props.accept"
+      :limit="1"
+      @change="uploadFile"
+    >
+      <ElButton type="primary" :loading="isLoading">
+        Загрузить
+      </ElButton>
 
-  <CFileUpload
-    v-show="!isLoading"
-    mode="basic"
-    :accept="props.accept"
-    :max-file-size="props.maxFileSize"
-    custom-upload
-    @select="uploadFile"
-  />
+      <template v-if="fileError" #tip>
+        <div class="el-upload__tip">
+          {{ fileError }}
+        </div>
+      </template>
+    </ElUpload>
+  </div>
 </template>
+
+<style lang="scss">
+.file-uploader {
+  max-width: 300px;
+}
+</style>

@@ -1,6 +1,6 @@
-const DEFAULT_ERROR_MESSAGE:String = 'Что-то пошло не так'
+const DEFAULT_ERROR_MESSAGE = 'Что-то пошло не так'
 
-export function getErrorMessage (error: unknown): String {
+export function getErrorMessage (error: unknown): string {
   if (error instanceof Error) {
     return error.message
   }

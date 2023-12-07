@@ -1,22 +1,20 @@
 <script setup lang="ts">
-import type { User, MenuItem } from 'types'
+import type { User, MenuItem } from '@/types'
 
 const isLogged = ref(false)
-
-const menu = ref()
 
 const menuItems = ref<MenuItem[]>([
   {
     label: 'Профиль',
-    icon: 'pi pi-user'
+    icon: ElIconUser
   },
   {
     label: 'Объявления',
-    icon: 'pi pi-star'
+    icon: ElIconStar
   },
   {
     label: 'Выход',
-    icon: 'pi pi-sign-out'
+    icon: ElIconSwitchButton
   }
 ])
 
@@ -33,36 +31,34 @@ const menuAvatarSource = computed<string | undefined>(() => {
 const toggleLogin = () => {
   isLogged.value = !isLogged.value
 }
-
-const toggle = (event:Event) => {
-  menu.value.toggle(event)
-}
 </script>
 
 <template>
   <div class="menu-container">
-    <CButton
+    <ElButton
       v-if="!isLogged"
-      type="button"
-      label="Вход"
-      icon="pi pi-user"
-      outlined
+      :icon="ElIconUser"
+      type="primary"
       @click="toggleLogin"
-    />
-
-    <CButton
-      v-else
-      type="button"
-      aria-haspopup="true"
-      aria-controls="overlay_menu"
-      class="menu-button"
-      rounded
-      @click="toggle"
     >
-      <CAvatar :image="menuAvatarSource" shape="circle" size="large" />
-    </CButton>
+      Вход
+    </ElButton>
 
-    <CMenu id="overlay_menu" ref="menu" :model="menuItems" :popup="true" />
+    <ElDropdown v-else placement="bottom-end">
+      <ElButton
+        class="menu-button"
+      >
+        <ElAvatar :src="menuAvatarSource" size="large" />
+      </ElButton>
+
+      <template #dropdown>
+        <ElDropdownMenu>
+          <ElDropdownItem v-for="item in menuItems" :key="item.label" :icon="item.icon">
+            {{ item.label }}
+          </ElDropdownItem>
+        </ElDropdownMenu>
+      </template>
+    </ElDropdown>
   </div>
 </template>
 
@@ -82,9 +78,4 @@ const toggle = (event:Event) => {
     background: unset;
   }
 }
-
-.p-menu {
-  margin-top: 8px;
-}
-
 </style>

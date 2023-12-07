@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useToast } from 'primevue/usetoast'
-const toast = useToast()
+import { ElNotification } from 'element-plus'
+
 const client = useSupabaseClient()
 
 const isSuccess = ref(false)
@@ -21,7 +21,7 @@ async function onSubmit () {
       isSuccess.value = true
     }
   } catch (error) {
-    toast.add({ severity: 'error', summary: 'Ошибка регистрации', detail: getErrorMessage(error), life: 3000 })
+    ElNotification({ type: 'error', title: 'Ошибка регистрации', message: getErrorMessage(error) })
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useToast } from 'primevue/usetoast'
-import type { Profile } from '../types'
+import { ElNotification } from 'element-plus'
+import type { Profile } from '@/types'
 
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
@@ -10,8 +10,6 @@ const profile:Profile = reactive({
   phone: '',
   avatar_url: ''
 })
-
-const toast = useToast()
 
 const isLoading = ref(false)
 
@@ -33,7 +31,7 @@ const getProfileData = async () => {
       throw new Error(result.error.message)
     }
   } catch (error) {
-    toast.add({ severity: 'error', summary: 'Ошибка обновления профиля', detail: getErrorMessage(error), life: 3000 })
+    ElNotification({ type: 'error', title: 'Ошибка обновления профиля', message: getErrorMessage(error) })
   } finally {
     isLoading.value = false
   }
@@ -52,12 +50,12 @@ const updateProfile = async () => {
     })
 
     if (!result.error) {
-      toast.add({ severity: 'success', summary: 'Профиль обновлён', detail: 'Данные успешно обновлены', life: 3000 })
+      ElNotification({ type: 'success', title: 'Профиль обновлён', message: 'Данные успешно обновлены' })
     } else {
       throw new Error(result.error.message)
     }
   } catch (error) {
-    toast.add({ severity: 'error', summary: 'Ошибка обновления профиля', detail: getErrorMessage(error), life: 3000 })
+    ElNotification({ type: 'error', title: 'Ошибка обновления профиля', message: getErrorMessage(error) })
   }
 }
 

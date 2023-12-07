@@ -26,7 +26,7 @@ export interface createdPost extends Post {
 }
 export interface MenuItem {
   label: string,
-  icon: string,
+  icon: Component,
 }
 
 export type FileUploadSelectEvent = {

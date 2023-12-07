@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import type { createdPost } from '@/types'
 import { Storages } from '@/types'
-import type { createdPost } from 'types'
 
 defineProps<{
   data: createdPost
 }>()
+
 </script>
 
 <template>
@@ -21,7 +22,7 @@ defineProps<{
       <div>
         <RemoteImageProvider v-slot="image" :image-url="data.image_url" :storage="Storages.IMAGES">
           <div class="post__img-container">
-            <CImage image-class="post__img" :src="image.src" />
+            <ElImage image-class="post__img" :src="image.src" />
           </div>
         </RemoteImageProvider>
 
@@ -85,12 +86,10 @@ defineProps<{
     background: #b2b2b2;
     text-align: center;
     overflow: hidden;
-  }
 
-  &__img {
-    height: 100%;
-    margin-left: 50%;
-    transform: translate(-50%, 0);
+    .el-image {
+      height: 100%;
+    }
   }
 
   &__description-title {
