@@ -13,7 +13,7 @@ const mockData:Profile = {
 }
 
 describe('ContactCart', () => {
-  test('is render', async () => {
+  test('Рендер компонента', async () => {
     await renderSuspended(ContactCart, {
       props: {
         data: mockData
@@ -24,13 +24,13 @@ describe('ContactCart', () => {
     expect(screen.getByText(mockData.phone)).toBeDefined()
   })
 
-  test('phone is accessable', async () => {
+  test('Телефон кликабелен', async () => {
     await renderSuspended(ContactCart, {
       props: {
         data: mockData
       }
     })
 
-    expect(document.querySelector('a')?.getAttribute('href')).toBe(`tel:${mockData.phone}`)
+    expect(document.querySelector('.contact-cart__phone')?.getAttribute('href')).toBe(`tel:${mockData.phone}`)
   })
 })
