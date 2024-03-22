@@ -58,7 +58,3 @@ const createPost = async () => {
     />
   </FormKit>
 </template>
-
-<style lang="scss">
-
-</style>

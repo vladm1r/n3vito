@@ -6,12 +6,7 @@ const supabase = useSupabaseClient()
 
 const route = useRoute()
 
-const post:createdPost = reactive({
-  title: '',
-  price: 0,
-  image_url: '',
-  description: ''
-})
+const post:Ref<createdPost | undefined> = ref()
 
 const isLoading = ref(false)
 
@@ -24,11 +19,7 @@ const getPost = async () => {
       .select().eq('id', route.params.id)
 
     if (!result.error) {
-      const data = result.data[0]
-      post.title = data.title
-      post.price = data.price
-      post.image_url = data.image_url
-      post.description = data.description
+      post.value = result.data[0]
     } else {
       throw new Error(result.error.message)
     }
@@ -43,7 +34,7 @@ const updatePost = async () => {
   try {
     const result = await supabase
       .from('posts')
-      .update(post)
+      .update(post.value)
       .eq('id', route.params.id)
 
     if (!result.error) {
@@ -64,7 +55,7 @@ getPost()
   <LoadSpinner v-if="isLoading" />
 
   <FormKit
-    v-else
+    v-else-if="post"
     type="form"
     submit-label="обновить"
     @submit="updatePost"

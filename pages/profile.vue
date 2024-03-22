@@ -5,11 +5,7 @@ import type { Profile } from '@/types'
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
 
-const profile:Profile = reactive({
-  full_name: '',
-  phone: '',
-  avatar_url: ''
-})
+const profile:Ref<Profile | undefined> = ref()
 
 const isLoading = ref(false)
 
@@ -19,14 +15,12 @@ const getProfileData = async () => {
 
     const result = await supabase
       .from('profiles')
-      .select('full_name, phone, avatar_url')
+      .select('id, full_name, phone, avatar_url')
       .eq('id', user.value.id)
       .single()
 
     if (!result.error) {
-      profile.full_name = result.data.full_name
-      profile.phone = result.data.phone
-      profile.avatar_url = result.data.avatar_url
+      profile.value = result.data
     } else {
       throw new Error(result.error.message)
     }
@@ -40,14 +34,11 @@ const getProfileData = async () => {
 const updateProfile = async () => {
   try {
     const updateData = {
-      id: user.value.id,
       updated_at: new Date(),
-      ...profile
+      ...profile.value
     }
 
-    const result = await supabase.from('profiles').update(updateData, {
-      returning: 'minimal'
-    })
+    const result = await supabase.from('profiles').update(updateData).eq('id', user.value.id)
 
     if (!result.error) {
       ElNotification({ type: 'success', title: 'Профиль обновлён', message: 'Данные успешно обновлены' })
@@ -66,7 +57,7 @@ getProfileData()
   <LoadSpinner v-if="isLoading" />
 
   <FormKit
-    v-else
+    v-else-if="profile"
     type="form"
     submit-label="Обновить"
     @submit="updateProfile"

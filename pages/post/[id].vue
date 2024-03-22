@@ -6,18 +6,8 @@ const supabase = useSupabaseClient()
 
 const route = useRoute()
 
-const post:createdPost = reactive({
-  title: '',
-  price: 0,
-  image_url: '',
-  description: ''
-})
-
-const author:Profile = reactive({
-  full_name: '',
-  avatar_url: '',
-  phone: ''
-})
+const post:Ref<createdPost | undefined> = ref()
+const author:Ref<Profile | undefined> = ref()
 
 const isLoading = ref(false)
 
@@ -27,18 +17,11 @@ const getPost = async () => {
 
     const result = await supabase
       .from('posts')
-      .select('title, price, image_url, description, profiles(full_name, phone, avatar_url)').eq('id', route.params.id)
+      .select('id, title, price, image_url, description, profiles(id, full_name, phone, avatar_url)').eq('id', route.params.id)
 
     if (!result.error) {
-      const data = result.data[0]
-      post.title = data.title
-      post.price = data.price
-      post.image_url = data.image_url
-      post.description = data.description
-
-      author.full_name = data.profiles?.full_name
-      author.avatar_url = data.profiles?.avatar_url
-      author.phone = data.profiles?.phone
+      post.value = result.data[0]
+      author.value = result.data[0].profiles
     } else {
       throw new Error(result.error.message)
     }
@@ -56,9 +39,9 @@ getPost()
 <template>
   <LoadSpinner v-if="isLoading" />
 
-  <Post v-else :data="post">
+  <Post v-else-if="post" :data="post">
     <template #sidebar>
-      <ContactCart :data="author" />
+      <ContactCart v-if="author" :data="author" />
     </template>
   </Post>
 </template>

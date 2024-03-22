@@ -5,7 +5,7 @@ import type { createdPost } from '@/types'
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
 
-const posts = ref([])
+const posts: Ref<createdPost[]> = ref([])
 
 const isLoading = ref(false)
 

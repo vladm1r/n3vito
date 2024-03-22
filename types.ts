@@ -5,6 +5,7 @@ export interface User {
 }
 
 export interface Profile {
+  id: string,
   full_name: string,
   phone: string
   avatar_url: string,
@@ -22,15 +23,13 @@ export interface newPost extends Post {
 }
 
 export interface createdPost extends Post {
-  created_at?: Date
+  id: string,
+  created_at?: Date,
 }
+
 export interface MenuItem {
   label: string,
   icon: Component,
-}
-
-export type FileUploadSelectEvent = {
-  originalEvent: Event
 }
 
 export enum Storages {
