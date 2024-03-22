@@ -20,13 +20,11 @@ const onAvatarUpload = (avatarPath:string) => {
       Выберите изображение для аватара
     </label>
 
-    <RemoteImageProvider v-slot="image" :image-url="modelValue" :storage="Storages.AVATARS">
-      <img
-        :src="image.src"
-        alt="Avatar"
-        class="upload-avatar__image"
-      >
-    </RemoteImageProvider>
+    <img
+      :src="modelValue"
+      alt="Avatar"
+      class="upload-avatar__image"
+    >
 
     <FileUploader :storage="Storages.AVATARS" accept="image/png, image/jpeg" @update="onAvatarUpload" />
   </div>

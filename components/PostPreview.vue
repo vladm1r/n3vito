@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Storages } from '@/types'
-
 defineProps<{
   data: object
 }>()
@@ -9,9 +7,7 @@ defineProps<{
 <template>
   <div class="post-preview">
     <div class="post-preview__image-container">
-      <RemoteImageProvider v-slot="image" :image-url="data.image_url" :storage="Storages.IMAGES">
-        <ElImage image-class="post-preview__image" :src="image.src" />
-      </RemoteImageProvider>
+      <ElImage image-class="post-preview__image" :src="data.image_url" />
     </div>
 
     <div class="post-preview__content">

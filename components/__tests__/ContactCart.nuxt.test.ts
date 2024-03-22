@@ -33,4 +33,15 @@ describe('ContactCart', () => {
 
     expect(document.querySelector('.contact-cart__phone')?.getAttribute('href')).toBe(`tel:${mockData.phone}`)
   })
+
+  test('картинка', async () => {
+    await renderSuspended(ContactCart, {
+      props: {
+        data: mockData
+      }
+    })
+    console.log(document.querySelector('.el-avatar')?.querySelector('img'))
+
+    expect(document.querySelector('.el-avatar')?.querySelector('img')?.getAttribute('src')).toBe('test')
+  })
 })

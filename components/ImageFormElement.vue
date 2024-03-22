@@ -20,13 +20,11 @@ const onImageUpload = (imagePath:string) => {
       Выберите изображение для объявления
     </label>
 
-    <RemoteImageProvider v-slot="image" :image-url="modelValue" :storage="Storages.IMAGES">
-      <img
-        :src="image.src"
-        alt="Post image"
-        class="upload-image__image"
-      >
-    </RemoteImageProvider>
+    <img
+      :src="modelValue"
+      alt="Post image"
+      class="upload-image__image"
+    >
 
     <FileUploader :storage="Storages.IMAGES" @update="onImageUpload" />
   </div>

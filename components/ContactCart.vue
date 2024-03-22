@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Profile } from '@/types'
-import { Storages } from '@/types'
 
 defineProps<{
   data: Profile
@@ -16,9 +15,7 @@ defineProps<{
       <a :href="`tel:${data.phone}`" class="contact-cart__phone"> {{ data.phone }}</a>
     </div>
 
-    <RemoteImageProvider v-slot="image" :image-url="data.avatar_url" :storage="Storages.AVATARS">
-      <ElAvatar :src="image.src" />
-    </RemoteImageProvider>
+    <ElAvatar :src="data.avatar_url" />
   </div>
 </template>
 

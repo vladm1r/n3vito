@@ -36,7 +36,12 @@ const uploadFile = async (uploadFile: UploadFile) => {
     const result = await supabase.storage.from(props.storage).upload(filePath, file)
 
     if (!result.error) {
-      emit('update', filePath)
+      const { data } = supabase
+        .storage
+        .from(props.storage)
+        .getPublicUrl(filePath)
+
+      emit('update', data.publicUrl)
     } else {
       throw new Error(result.error.message)
     }
