@@ -21,6 +21,10 @@ const createPost = async () => {
 
     if (!result.error) {
       ElNotification({ type: 'success', title: 'Успех', message: 'Объявление создано' })
+
+      setTimeout(() => {
+        navigateTo('/collection')
+      }, 1000)
     } else {
       throw new Error(result.error.message)
     }
