@@ -2,7 +2,7 @@
 import { Storages } from '@/types'
 
 defineProps<{
-  modelValue: string
+  modelValue?: string
 }>()
 
 const emit = defineEmits<{
@@ -21,6 +21,7 @@ const onImageUpload = (imagePath:string) => {
     </label>
 
     <img
+      v-if="modelValue"
       :src="modelValue"
       alt="Post image"
       class="upload-image__image"
