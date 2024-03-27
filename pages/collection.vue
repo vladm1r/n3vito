@@ -9,16 +9,24 @@ const posts: Ref<createdPost[]> = ref([])
 
 const isLoading = ref(false)
 
+const currentPage = ref(1)
+const PER_PAGE = 3
+const pagesCount:Ref<number | null> = ref(null)
+
 const getPosts = async () => {
   try {
     isLoading.value = true
 
+    const from = currentPage.value * PER_PAGE - PER_PAGE
+    const to = currentPage.value * PER_PAGE - 1
+
     const result = await supabase
       .from('posts')
-      .select().eq('user_id', user.value.id)
+      .select('*', { count: 'exact' }).eq('user_id', user.value.id).range(from, to)
 
     if (!result.error) {
       posts.value = result.data
+      pagesCount.value = result.count
     } else {
       throw new Error(result.error.message)
     }
@@ -29,17 +37,35 @@ const getPosts = async () => {
   }
 }
 
-getPosts()
+const hanglePageChange = (page:number) => {
+  if (currentPage.value !== page) {
+    currentPage.value = page
+    getPosts()
+  }
+}
 
+getPosts()
 </script>
 
 <template>
-  <LoadSpinner v-if="isLoading" />
-  <div v-else>
-    <PostPreview v-for="post in posts" :key="post.id" :data="post">
-      <template #menu>
-        <ElButton :icon="ElIconEdit" circle @click="navigateTo(`/post/update/${post.id}`)" />
-      </template>
-    </PostPreview>
+  <div>
+    <LoadSpinner v-if="isLoading" />
+    <div v-else>
+      <PostPreview v-for="post in posts" :key="post.id" :data="post">
+        <template #menu>
+          <ElButton :icon="ElIconEdit" circle @click="navigateTo(`/post/update/${post.id}`)" />
+        </template>
+      </PostPreview>
+    </div>
+
+    <ElPagination
+      v-if="pagesCount"
+      background
+      layout="prev, pager, next"
+      :current-page="currentPage"
+      :page-size="PER_PAGE"
+      :total="pagesCount"
+      @current-change="hanglePageChange"
+    />
   </div>
 </template>
