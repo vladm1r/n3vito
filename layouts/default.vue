@@ -13,4 +13,8 @@
   margin: 0 auto;
   padding-top: 40px;
 }
+
+.el-pagination {
+  justify-content: center;
+}
 </style>
