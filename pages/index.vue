@@ -73,6 +73,7 @@ getPosts()
       v-if="pagesCount"
       background
       layout="prev, pager, next"
+      hide-on-single-page
       :current-page="currentPage"
       :page-size="PER_PAGE"
       :total="pagesCount"
