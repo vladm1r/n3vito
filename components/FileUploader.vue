@@ -97,5 +97,9 @@ const createFileName = (file:UploadRawFile):string => {
 <style lang="scss">
 .file-uploader {
   max-width: 300px;
+
+  .el-upload__tip {
+    color: $color-danger;
+  }
 }
 </style>
