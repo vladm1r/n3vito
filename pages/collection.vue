@@ -53,7 +53,9 @@ getPosts()
     <div v-else>
       <PostPreview v-for="post in posts" :key="post.id" :data="post">
         <template #menu>
-          <ElButton :icon="ElIconEdit" circle @click="navigateTo(`/post/update/${post.id}`)" />
+          <ElTooltip content="Редактировать объявление" placement="top-start">
+            <ElButton :icon="ElIconEditPen" circle @click="navigateTo(`/post/update/${post.id}`)" />
+          </ElTooltip>
         </template>
       </PostPreview>
     </div>

@@ -1,18 +1,24 @@
 <script setup lang="ts">
+import type { createdPost } from '@/types'
+
 defineProps<{
-  data: object
+  data: createdPost
 }>()
 </script>
 
 <template>
   <div class="post-preview">
     <div class="post-preview__image-container">
-      <ElImage image-class="post-preview__image" :src="data.image_url" />
+      <NuxtLink :to="`post/${data.id}`">
+        <ElImage image-class="post-preview__image" :src="data.image_url" />
+      </NuxtLink>
     </div>
 
     <div class="post-preview__content">
       <h3 class="post-preview__title">
-        {{ data.title }}
+        <NuxtLink :to="`post/${data.id}`">
+          {{ data.title }}
+        </NuxtLink>
       </h3>
 
       <PriceDisplay :value="data.price" class="post-preview__price" />
@@ -31,7 +37,7 @@ defineProps<{
 <style lang="scss">
 .post-preview {
   position: relative;
-  border: 1px solid $color-primary;
+  border: 1px solid $color-secondary;
   border-radius: $border-radius;
   padding: 20px 40px 20px 20px;
   margin-bottom: 20px;
@@ -57,6 +63,11 @@ defineProps<{
     font-size: $font-size-2xl;
     font-weight: 700;
     margin: 0 0 12px 0;
+
+    a {
+      color: $color-text-primary;
+      text-decoration: none;
+    }
   }
 
   &__price {
