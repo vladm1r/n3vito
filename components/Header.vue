@@ -1,8 +1,12 @@
+<script setup lang="ts">
+const user = useSupabaseUser()
+</script>
+
 <template>
   <header>
     <div class="header-container">
       <Logo />
-      <Menu />
+      <Menu v-if="user" />
     </div>
   </header>
 </template>
