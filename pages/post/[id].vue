@@ -37,7 +37,7 @@ getPost()
 </script>
 
 <template>
-  <LoadSpinner v-if="isLoading" />
+  <ElSkeleton v-if="isLoading" :rows="5" animated />
 
   <Post v-else-if="post" :data="post">
     <template #sidebar>

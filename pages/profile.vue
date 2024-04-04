@@ -54,7 +54,7 @@ getProfileData()
 </script>
 
 <template>
-  <LoadSpinner v-if="isLoading" />
+  <ElSkeleton v-if="isLoading" :rows="5" animated />
 
   <FormKit
     v-else-if="profile"

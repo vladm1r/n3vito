@@ -49,16 +49,15 @@ getPosts()
 
 <template>
   <div>
-    <LoadSpinner v-if="isLoading" />
-    <div v-else>
-      <PostPreview v-for="post in posts" :key="post.id" :data="post">
-        <template #menu>
-          <ElTooltip content="Редактировать объявление" placement="top-start">
-            <ElButton :icon="ElIconEditPen" circle @click="navigateTo(`/post/update/${post.id}`)" />
-          </ElTooltip>
-        </template>
-      </PostPreview>
-    </div>
+    <ElSkeleton v-if="isLoading" :rows="5" animated />
+
+    <PostPreview v-for="post in posts" v-else :key="post.id" :data="post">
+      <template #menu>
+        <ElTooltip content="Редактировать объявление" placement="top-start">
+          <ElButton :icon="ElIconEditPen" circle @click="navigateTo(`/post/update/${post.id}`)" />
+        </ElTooltip>
+      </template>
+    </PostPreview>
 
     <ElPagination
       v-if="pagesCount"

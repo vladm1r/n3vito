@@ -64,10 +64,9 @@ getPosts()
       @input="handleInput"
     />
 
-    <LoadSpinner v-if="isLoading" />
-    <div v-else>
-      <PostPreview v-for="post in posts" :key="post.id" :data="post" />
-    </div>
+    <ElSkeleton v-if="isLoading" :rows="5" animated />
+
+    <PostPreview v-for="post in posts" v-else :key="post.id" :data="post" />
 
     <ElPagination
       v-if="pagesCount"
@@ -77,6 +76,7 @@ getPosts()
       :current-page="currentPage"
       :page-size="PER_PAGE"
       :total="pagesCount"
+      class="pagina"
       @current-change="hanglePageChange"
     />
   </div>

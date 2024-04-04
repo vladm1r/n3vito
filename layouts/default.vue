@@ -16,5 +16,6 @@
 
 .el-pagination {
   justify-content: center;
+  margin-top: 32px;
 }
 </style>
