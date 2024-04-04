@@ -51,7 +51,7 @@ const signup = async () => {
 }
 
 const onSubmit = () => {
-  if (isSignUpMode) {
+  if (isSignUpMode.value) {
     signup()
   } else {
     login()
