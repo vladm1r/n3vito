@@ -1,11 +1,8 @@
 export interface User {
-  name: string,
-  avatar?: string,
-  phone: string
+  id: string,
 }
 
-export interface Profile {
-  id: string,
+export interface Profile extends User {
   full_name: string,
   phone: string
   avatar_url: string,
@@ -30,6 +27,7 @@ export interface createdPost extends Post {
 export interface MenuItem {
   label: string,
   icon: Component,
+  action?: Function
 }
 
 export enum Storages {
