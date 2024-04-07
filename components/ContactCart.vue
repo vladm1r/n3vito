@@ -15,7 +15,7 @@ defineProps<{
       <a :href="`tel:${data.phone}`" class="contact-cart__phone"> {{ data.phone }}</a>
     </div>
 
-    <ElAvatar :src="data.avatar_url" />
+    <ElAvatar :src="data.avatar_url" :icon="ElIconUserFilled" />
   </div>
 </template>
 
