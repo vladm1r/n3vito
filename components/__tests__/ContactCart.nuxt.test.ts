@@ -40,7 +40,6 @@ describe('ContactCart', () => {
         data: mockData
       }
     })
-    console.log(document.querySelector('.el-avatar')?.querySelector('img'))
 
     expect(document.querySelector('.el-avatar')?.querySelector('img')?.getAttribute('src')).toBe('test')
   })
