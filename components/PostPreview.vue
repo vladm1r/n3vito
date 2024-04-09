@@ -39,7 +39,7 @@ defineProps<{
   position: relative;
   border: 1px solid $color-secondary;
   border-radius: $border-radius;
-  padding: 20px 40px 20px 20px;
+  padding: 20px;
   margin-bottom: 20px;
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -47,6 +47,14 @@ defineProps<{
 
   @media (max-width: $bp-mobile) {
     display: block;
+  }
+
+  &:has(button) {
+    padding: 20px 40px 20px 20px;
+
+    @media (max-width: $bp-mobile) {
+      padding: 60px 20px 20px 20px;
+    }
   }
 
   &__image-container {
