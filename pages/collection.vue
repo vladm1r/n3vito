@@ -49,6 +49,12 @@ getPosts()
 
 <template>
   <div>
+    <NuxtLink to="/post/create" class="new-post-btn">
+      <ElButton type="primary" :icon="ElIconPlus">
+        Разместить объявление
+      </ElButton>
+    </NuxtLink>
+
     <ElSkeleton v-if="isLoading" :rows="5" animated />
 
     <PostPreview v-for="post in posts" v-else :key="post.id" :data="post">
@@ -71,3 +77,10 @@ getPosts()
     />
   </div>
 </template>
+
+<style lang="scss">
+.new-post-btn {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+</style>

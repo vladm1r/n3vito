@@ -36,6 +36,11 @@ const menuItems = ref<MenuItem[]>([
     action: () => navigateTo('/collection')
   },
   {
+    label: 'Новое объявление',
+    icon: ElIconPlus,
+    action: () => navigateTo('/post/create')
+  },
+  {
     label: 'Выход',
     icon: ElIconSwitchButton,
     action: logOut
