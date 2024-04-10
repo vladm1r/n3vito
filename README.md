@@ -1,42 +1,14 @@
-# Nuxt 3 Minimal Starter
+# n3vito
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Простой клон Авито с минимальным функционалом. Можно искать, размещать, редактировать объявления
+Посмотреть можно тут :point_right: [n3vito](https://6616a3b35a183e0008dcff53--extraordinary-baklava-2c2f30.netlify.app/) 
 
-## Setup
+## Инструменты
 
-Make sure to install the dependencies:
-
-```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+* Νuxt 3
+* TypeScript
+* Scss
+* FormKit
+* Element Plus
+* Vitest
+* Supabase
